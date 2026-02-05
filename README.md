@@ -53,6 +53,70 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+## PROGRAM
+### SERVER SIDE
+```
+import socket
+
+# Create a socket object
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind the socket to IP address and port
+host = '127.0.0.1'   # Localhost
+port = 12345
+
+server_socket.bind((host, port))
+
+# Listen for incoming connections
+server_socket.listen(1)
+print("Server is listening on port", port)
+
+# Accept a client connection
+conn, addr = server_socket.accept()
+print("Connected to client:", addr)
+
+# Receive data from client
+data = conn.recv(1024).decode()
+print("Message from client:", data)
+
+# Send response to client
+message = "Hello Client, message received successfully"
+conn.send(message.encode())
+
+# Close the connection
+conn.close()
+server_socket.close()
+```
+### CLIENT SIDE
+```
+import socket
+
+# Create a socket object
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Server IP address and port
+host = '127.0.0.1'
+port = 12345
+
+# Connect to the server
+client_socket.connect((host, port))
+
+# Send message to server
+message = "Hello Server"
+client_socket.send(message.encode())
+
+# Receive response from server
+data = client_socket.recv(1024).decode()
+print("Message from server:", data)
+
+# Close the connection
+client_socket.close()
+```
+## OUTPUT
+### SERVER SIDE
+<img width="1920" height="1080" alt="SERVER_PROGRAM" src="https://github.com/user-attachments/assets/7c0f2566-49f2-4c17-8d43-046d1b385348" />
+### CLIENT SIDE
+<img width="1920" height="1080" alt="CLIENT_PROGRAM" src="https://github.com/user-attachments/assets/4c6c6937-53ce-4674-b9bb-b57304a1a46e" />
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
